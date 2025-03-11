@@ -52,6 +52,7 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .style-card:hover {
@@ -62,6 +63,7 @@
             width: 100%;
             height: 250px;
             object-fit: cover;
+            cursor: pointer;
         }
 
         .style-content {
@@ -85,6 +87,37 @@
             color: #666;
         }
 
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            margin-top: 2%;
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 10px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -103,7 +136,7 @@
     </header>
 
     <div class="styles-grid">
-        <div class="style-card">
+        <div class="style-card" onclick="openModal(this.querySelector('img').src)">
             <img src="images/japandi.png" alt="Japandi dining room">
             <div class="style-content">
                 <h2>Japandi</h2>
@@ -118,7 +151,7 @@
             </div>
         </div>
 
-        <div class="style-card">
+        <div class="style-card" onclick="openModal(this.querySelector('img').src)">
             <img src="images/biophilic.png" alt="Biophilic dining room">
             <div class="style-content">
                 <h2>Biophilic Design</h2>
@@ -133,7 +166,7 @@
             </div>
         </div>
 
-        <div class="style-card">
+        <div class="style-card" onclick="openModal(this.querySelector('img').src)">
             <img src="images/modern-mediterranean.png" alt="Modern Mediterranean dining room">
             <div class="style-content">
                 <h2>Modern Mediterranean</h2>
@@ -148,7 +181,7 @@
             </div>
         </div>
 
-        <div class="style-card">
+        <div class="style-card" onclick="openModal(this.querySelector('img').src)">
             <img src="images/new-art-deco.png" alt="New Art Deco dining room">
             <div class="style-content">
                 <h2>New Art Deco</h2>
@@ -162,6 +195,68 @@
                 <p class="designer">Featured Designer: India Mahdavi - Sketch London</p>
             </div>
         </div>
+
+        <div class="style-card" onclick="openModal(this.querySelector('img').src)">
+            <img src="images/scandinavian-minimalist.png" alt="Scandinavian Minimalist dining room">
+            <div class="style-content">
+                <h2>Scandinavian Minimalism</h2>
+                <p>Embracing the Nordic principles of simplicity, functionality, and natural beauty to create bright, uncluttered spaces.</p>
+                <ul class="key-elements">
+                    <li>White walls and light woods</li>
+                    <li>Minimal decor and clean lines</li>
+                    <li>Natural light emphasis</li>
+                    <li>Iconic Scandinavian furniture</li>
+                </ul>
+                <p class="designer">Featured Designer: Fritz Hansen - Danish Design Heritage</p>
+            </div>
+        </div>
+
+        <div class="style-card" onclick="openModal(this.querySelector('img').src)">
+            <img src="images/industrial-luxe.png" alt="Industrial Luxe dining room">
+            <div class="style-content">
+                <h2>Industrial Luxe</h2>
+                <p>A sophisticated blend of raw industrial elements with luxurious finishes, creating an elegant yet edgy aesthetic.</p>
+                <ul class="key-elements">
+                    <li>Exposed brick and metal</li>
+                    <li>Factory-style windows</li>
+                    <li>Mixed materials (marble, velvet)</li>
+                    <li>Statement lighting</li>
+                </ul>
+                <p class="designer">Featured Project: Tribeca Loft by Roman and Williams</p>
+            </div>
+        </div>
     </div>
+
+    <!-- Modal for full-size images -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+        }
+
+        // Close modal when clicking the close button
+        document.querySelector('.close').onclick = function(e) {
+            e.stopPropagation();
+            closeModal();
+        };
+
+        // Close modal when pressing ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
